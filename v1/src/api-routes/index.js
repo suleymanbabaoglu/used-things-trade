@@ -1,0 +1,12 @@
+module.exports.UserRoutes = require("./Users");
+module.exports.AdvertRoutes = require("./Adverts");
+module.exports.CountryRoutes = require("./Countries");
+module.exports.StateRoutes = require("./States");
+module.exports.CityRoutes = require("./Cities");
+module.exports.BrandRoutes = require("./Brands");
+module.exports.ModelRoutes = require("./Models");
+module.exports.ColorRoutes = require("./Colors");
+module.exports.FuelRoutes = require("./Fuels");
+module.exports.TransmissionRoutes = require("./Transmissions");
+module.exports.VehicleStatusRoutes = require("./VehicleStatuses");
+module.exports.VehicleTypeRoutes = require("./VehicleTypes");
