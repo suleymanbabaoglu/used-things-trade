@@ -10,4 +10,6 @@ router.route("/").get(authenticate, AdvertController.index);
 router.route("/").post(authenticate, validate(schemas.createValidation), AdvertController.create);
 router.route("/:id").patch(idChecker, authenticate, validate(schemas.updateValidation), AdvertController.update);
 router.route("/:id").delete(idChecker, authenticate, AdvertController.delete);
+
+router.route("/:id/photo-upload").post(idChecker, authenticate, AdvertController.photoUpload);
 module.exports = router;
