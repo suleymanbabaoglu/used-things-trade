@@ -1,6 +1,11 @@
 <template>
   <app-header />
-    <router-view />
+  <div class="container-fluid">
+    <div class="row">
+      <app-sidebar />
+      <router-view />
+    </div>
+  </div>
   <app-footer />
 </template>
 

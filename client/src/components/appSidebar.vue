@@ -5,38 +5,73 @@
   >
     <div class="sidebar-sticky pt-3">
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <router-link class="nav-link active" to="/">
-            <span data-feather="home"></span>
-            Dashboard <span class="sr-only">(current)</span>
-          </router-link>
-        </li>
-      </ul>
-
-      <h6
-        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-      >
-        <span>Saved reports</span>
-        <a
-          class="d-flex align-items-center text-muted"
-          href="#"
-          aria-label="Add a new report"
+        <li
+          class="nav-item"
+          v-for="(route, route_key) in routes"
+          :key="route_key"
         >
-          <span data-feather="plus-circle"></span>
-        </a>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </a>
+          <router-link
+            class="nav-link list-group-item"
+            :to="route.path"
+            active-class="active"
+          >
+            {{ route.name }}
+          </router-link>
         </li>
       </ul>
     </div>
   </nav>
 </template>
 
-<script></script>
+<script setup>
+import { ref } from "vue";
+const routes = ref([
+  {
+    path: "/",
+    name: "Home",
+  },
+  {
+    path: "/adverts",
+    name: "Adverts",
+  },
+  {
+    path: "/brands",
+    name: "Brands",
+  },
+  {
+    path: "/models",
+    name: "Models",
+  },
+  {
+    path: "/users",
+    name: "Users",
+  },
+]);
+</script>
 
-<style scoped></style>
+<style scoped>
+.list-group-item:last-child {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  color: #343A40;
+  background-color:transparent;
+  border: none !important;
+}
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #343A40;
+  border-color: #007bff;
+}
+</style>
