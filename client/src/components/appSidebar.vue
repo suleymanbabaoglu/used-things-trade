@@ -50,6 +50,12 @@ const routes = ref([
 </script>
 
 <style scoped>
+#sidebarMenu {
+  padding: 2px !important;
+}
+.collapse:not(.show) {
+  padding: 0 !important;
+}
 .list-group-item:last-child {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
@@ -61,17 +67,18 @@ const routes = ref([
 }
 
 .list-group-item {
+  margin: 0 !important;
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  color: #343A40;
-  background-color:transparent;
+  color: #343a40;
+  background-color: transparent;
   border: none !important;
 }
 .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #343A40;
+  background-color: #343a40;
   border-color: #007bff;
 }
 </style>

@@ -1,9 +1,11 @@
 const Joi = require("joi");
 
 const createValidation = Joi.object({
-  full_name: Joi.string().required().min(3),
-  password: Joi.string().required().min(8),
-  email: Joi.string().email().required().min(3),
+  FirstName: Joi.string().required().min(3),
+  LastName: Joi.string().required().min(3),
+  Password: Joi.string().required().min(8),
+  Email: Joi.string().email().required().min(3),
+  Phone: Joi.number().required().min(3),
 });
 
 const updateValidation = Joi.object({

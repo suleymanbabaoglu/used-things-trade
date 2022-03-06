@@ -9,7 +9,7 @@ db.once("open", () => {
 const connectDB = async () => {
   await Mongoose.connect(
     // `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT})/${process.env.DB_NAME}`,
-    "mongodb://localhost:27017",
+    "mongodb://localhost:27017/used-things-trade",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

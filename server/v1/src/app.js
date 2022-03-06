@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const helmet = require("helmet");
@@ -30,6 +31,7 @@ app.use("/uploads", express.static(path.join(__dirname, "./", "uploads"))); // S
 app.use(express.json());
 app.use(helmet()); // Güvenlik
 app.use(fileUpload());
+app.use(cors());
 
 app.listen(process.env.APP_PORT, () => {
   app.use("/users", UserRoutes);

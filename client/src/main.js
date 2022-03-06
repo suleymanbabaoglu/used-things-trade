@@ -7,6 +7,7 @@ import AppSidebar from "./components/appSidebar";
 import AppFooter from "./components/appFooter";
 
 const app = createApp(App);
+
 app.component("AppHeader", AppHeader);
 app.component("AppSidebar", AppSidebar);
 app.component("AppFooter", AppFooter);

@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    <vue3-chart-js v-bind="{ ...barChart }" />
 
     <h2>Section title</h2>
     <div class="table-responsive">
@@ -156,6 +156,53 @@
   </main>
 </template>
 
-<script></script>
+<script setup>
+import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
+
+const barChart = {
+  type: "bar",
+  options: {
+    min: 0,
+    max: 100,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "left",
+      },
+    },
+    scales: {
+      y: {
+        min: 0,
+        max: 100,
+        ticks: {
+          callback: function (value) {
+            return `${value}%`;
+          },
+        },
+      },
+    },
+  },
+  data: {
+    labels: ["VueJs", "EmberJs", "ReactJs", "AngularJs"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        backgroundColor: ["#1abc9c", "#f1c40f", "#2980b9", "#34495e"],
+        data: [40, 20, 50, 10],
+      },
+      {
+        label: "My Second Dataset",
+        backgroundColor: ["#2ecc71", "#e67e22", "#9b59b6", "#bdc3c7"],
+        data: [20, 40, 10, 50],
+      },
+      {
+        label: "My Third Dataset",
+        backgroundColor: ["#2980b9", "#34495e", "#e67e22", "#f1c40f"],
+        data: [26, 44, 45, 75],
+      },
+    ],
+  },
+};
+</script>
 
 <style scoped></style>
