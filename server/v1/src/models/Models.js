@@ -2,8 +2,8 @@ const Mongoose = require("mongoose");
 const logger = require("../scripts/logger/model");
 const ModelSchema = new Mongoose.Schema(
   {
-    name: String,
-    brand: {
+    Name: String,
+    Brand: {
       type: Mongoose.Types.ObjectId,
       ref: "Brand",
     },

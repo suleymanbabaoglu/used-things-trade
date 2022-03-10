@@ -20,12 +20,12 @@
             <th>Country</th>
             <th>Email</th>
             <th>Phone</th>
-            <th><img src="" /></th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(user, user_key) in users" :key="user_key">
-            <td>{{ user._id.substr(0,6) }}</td>
+            <td>{{ user._id.substr(0, 6) }}</td>
             <td>{{ user.FirstName }}</td>
             <td>{{ user.LastName }}</td>
             <td>{{ user.Gender }}</td>
@@ -36,6 +36,15 @@
             <td>{{ user.Country }}</td>
             <td>{{ user.Email }}</td>
             <td>{{ user.Phone }}</td>
+            <td>
+              <a :click="null" class="text-primary mr-3">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+
+              <a :click="null" class="text-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -50,6 +59,11 @@ let users = ref([]);
 onMounted(async () => {
   users.value = await UserService.list();
 });
+
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  cursor: pointer;
+}
+</style>

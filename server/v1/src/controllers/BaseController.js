@@ -4,6 +4,13 @@ class BaseController {
   constructor(service) {
     this.BaseService = service;
   }
+
+  findOne(req, res) {
+    this.BaseService?.findOne({ _id: req.params?.id })
+      .then((response) => res.status(httpStatus.OK).send(response))
+      .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
+  }
+
   index(req, res) {
     this.BaseService?.list()
       .then((response) => res.status(httpStatus.OK).send(response))
@@ -18,12 +25,10 @@ class BaseController {
 
   //! Burada Error Handling yapıldı
   update(req, res, next) {
-    if (!req.params?.id)
-      return next(new ApiError("ID Bilgisi Gereklidir", 400));
+    if (!req.params?.id) return next(new ApiError("ID Bilgisi Gereklidir", 400));
     this.BaseService?.update(req.params.id, req.body)
       .then((updated) => {
-        if (!updated)
-          return next(new ApiError("Böyle Bir Kayıt Bulunmamaktadır.", 404));
+        if (!updated) return next(new ApiError("Böyle Bir Kayıt Bulunmamaktadır.", 404));
         res.status(httpStatus.OK).send(updated);
       })
       .catch((e) => next(new ApiError(e?.message)));
@@ -31,14 +36,11 @@ class BaseController {
   delete(req, res) {
     this.BaseService?.delete(req.params?.id)
       .then((deleted) => {
-        if (!deleted)
-          return res.status(httpStatus.NOT_FOUND).send({ error: "Bulunamadı" });
+        if (!deleted) return res.status(httpStatus.NOT_FOUND).send({ error: "Bulunamadı" });
         res.status(httpStatus.OK).send({ message: "Silinmiştir." });
       })
       .catch((err) => {
-        return res
-          .status(httpStatus.INTERNAL_SERVER_ERROR)
-          .send({ error: "Silinirken bir hata oluştu." });
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: "Silinirken bir hata oluştu." });
       });
   }
 }

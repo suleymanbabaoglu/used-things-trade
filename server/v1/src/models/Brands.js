@@ -2,8 +2,8 @@ const Mongoose = require("mongoose");
 const logger = require("../scripts/logger/brand");
 const BrandSchema = new Mongoose.Schema(
   {
-    name: String,
-    favorite: Boolean,
+    Name: String,
+    Favorite: Boolean,
   },
   { versionKey: false, timestamps: true }
 );

@@ -22,13 +22,21 @@ class BaseService {
       } else throw ErrorConstraints.NETWORK_ERROR;*/
     }
   }
-  getById() {}
+  findOne(id) {
+    return this.request(this.Route + `/${id}`, "GET");
+  }
   list() {
     return this.request(this.Route, "GET");
   }
-  create() {}
-  update() {}
-  delete() {}
+  create(data) {
+    return this.request(this.Route, "POST", data);
+  }
+  update(id, data) {
+    return this.request(this.Route + `/${id}`, "PATCH", data);
+  }
+  delete(id) {
+    return this.request(this.Route + `/${id}`, "DELETE");
+  }
 }
 
 export default BaseService;

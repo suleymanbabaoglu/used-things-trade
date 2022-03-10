@@ -10,124 +10,25 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Header</th>
-          <th>Header</th>
-          <th>Header</th>
-          <th>Header</th>
+          <th>Model Name</th>
+          <th>Brand</th>
+          <th>#</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1,001</td>
-          <td>random</td>
-          <td>data</td>
-          <td>placeholder</td>
-          <td>text</td>
-        </tr>
-        <tr>
-          <td>1,002</td>
-          <td>placeholder</td>
-          <td>irrelevant</td>
-          <td>visual</td>
-          <td>layout</td>
-        </tr>
-        <tr>
-          <td>1,003</td>
-          <td>data</td>
-          <td>rich</td>
-          <td>dashboard</td>
-          <td>tabular</td>
-        </tr>
-        <tr>
-          <td>1,003</td>
-          <td>information</td>
-          <td>placeholder</td>
-          <td>illustrative</td>
-          <td>data</td>
-        </tr>
-        <tr>
-          <td>1,004</td>
-          <td>text</td>
-          <td>random</td>
-          <td>layout</td>
-          <td>dashboard</td>
-        </tr>
-        <tr>
-          <td>1,005</td>
-          <td>dashboard</td>
-          <td>irrelevant</td>
-          <td>text</td>
-          <td>placeholder</td>
-        </tr>
-        <tr>
-          <td>1,006</td>
-          <td>dashboard</td>
-          <td>illustrative</td>
-          <td>rich</td>
-          <td>data</td>
-        </tr>
-        <tr>
-          <td>1,007</td>
-          <td>placeholder</td>
-          <td>tabular</td>
-          <td>information</td>
-          <td>irrelevant</td>
-        </tr>
-        <tr>
-          <td>1,008</td>
-          <td>random</td>
-          <td>data</td>
-          <td>placeholder</td>
-          <td>text</td>
-        </tr>
-        <tr>
-          <td>1,009</td>
-          <td>placeholder</td>
-          <td>irrelevant</td>
-          <td>visual</td>
-          <td>layout</td>
-        </tr>
-        <tr>
-          <td>1,010</td>
-          <td>data</td>
-          <td>rich</td>
-          <td>dashboard</td>
-          <td>tabular</td>
-        </tr>
-        <tr>
-          <td>1,011</td>
-          <td>information</td>
-          <td>placeholder</td>
-          <td>illustrative</td>
-          <td>data</td>
-        </tr>
-        <tr>
-          <td>1,012</td>
-          <td>text</td>
-          <td>placeholder</td>
-          <td>layout</td>
-          <td>dashboard</td>
-        </tr>
-        <tr>
-          <td>1,013</td>
-          <td>dashboard</td>
-          <td>irrelevant</td>
-          <td>text</td>
-          <td>visual</td>
-        </tr>
-        <tr>
-          <td>1,014</td>
-          <td>dashboard</td>
-          <td>illustrative</td>
-          <td>rich</td>
-          <td>data</td>
-        </tr>
-        <tr>
-          <td>1,015</td>
-          <td>random</td>
-          <td>tabular</td>
-          <td>information</td>
-          <td>text</td>
+        <tr v-for="(model, model_key) in models" :key="model_key">
+          <td>{{ model._id.substr(0, 6) }}</td>
+          <td>{{ model.Name }}</td>
+          <td>{{ model.Brand.Name }}</td>
+          <td>
+            <a :click="null" class="text-primary mr-3">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+
+            <a :click="null" class="text-danger">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -135,10 +36,17 @@
   </main>
 </template>
 
-<script>
-  export default {
-    name: "Models",
-  };
+<script setup>
+  import { onMounted, ref } from "vue";
+  import ModelService from "../services/ModelService";
+  let models = ref([]);
+  onMounted(async () => {
+    models.value = await ModelService.list();
+  });
 </script>
 
-<style scoped></style>
+<style scoped>
+  a {
+    cursor: pointer;
+  }
+</style>

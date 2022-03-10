@@ -1,6 +1,8 @@
 const Constraints = {
   Routes: {
     User: "users",
+    Brand: "brands",
+    Model: "models",
   },
 };
 

@@ -1,6 +1,6 @@
 <template>
   <app-header />
-  <div class="container-fluid">
+  <div class="container-fluid full-height">
     <div class="row">
       <app-sidebar />
       <router-view />
@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.full-height {
+  height: 100%;
+}
+</style>
