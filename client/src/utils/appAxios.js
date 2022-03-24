@@ -3,8 +3,7 @@ export const appAxios = axios.create({
   baseURL: "http://localhost:3040",
   headers: {
     "Content-Type": "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiX2lkIjoiaW5pdCIsImNyZWF0ZWRBdCI6ImluaXQiLCJ1cGRhdGVkQXQiOiJpbml0In0sInN0YXRlcyI6eyJpZ25vcmUiOnt9LCJkZWZhdWx0Ijp7fSwiaW5pdCI6eyJfaWQiOnRydWUsImNyZWF0ZWRBdCI6dHJ1ZSwidXBkYXRlZEF0Ijp0cnVlfSwibW9kaWZ5Ijp7fSwicmVxdWlyZSI6e319LCJzdGF0ZU5hbWVzIjpbInJlcXVpcmUiLCJtb2RpZnkiLCJpbml0IiwiZGVmYXVsdCIsImlnbm9yZSJdfSwic3RyaWN0TW9kZSI6dHJ1ZSwic2tpcElkIjp0cnVlLCJzZWxlY3RlZCI6e30sImZpZWxkcyI6e30sImV4Y2x1ZGUiOm51bGwsIl9pZCI6IjYyMjM5ZmQxZThiZTNlOGJhNjU3YzY5MiJ9LCIkaXNOZXciOmZhbHNlLCJfZG9jIjp7Il9pZCI6IjYyMjM5ZmQxZThiZTNlOGJhNjU3YzY5MiIsImNyZWF0ZWRBdCI6IjIwMjItMDMtMDVUMTc6Mzc6MjEuODcwWiIsInVwZGF0ZWRBdCI6IjIwMjItMDMtMDVUMTc6Mzc6MjEuODcwWiJ9LCJpYXQiOjE2NDY1MDIzNjcsImV4cCI6MTY0NzEwNzE2N30.hB3FcfLvghrcjJR4mOuzf8JC1Mb_A6tFi7E3XwRJZV8",
+    Authorization: "Bearer " + localStorage.getItem("token"),
   },
 });
-    //Authorization: "Bearer " + localStorage.getItem("webToken"),
+
