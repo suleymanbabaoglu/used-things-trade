@@ -10,10 +10,10 @@
     />
   </div>
   <div class="form-group mb-3">
-    <select class="form-control" id="brand" v-model="model.Brand">
+    <select class="form-control" id="brand" v-model="model.Brand._id">
       <option
         v-for="(brand, brand_key) in brands"
-        :value="brand"
+        :value="brand._id"
         :key="brand_key"
       >
         {{ brand.Name }}
@@ -45,21 +45,19 @@ const props = defineProps({
 });
 let model = ref({
   Name: "",
-  Brand: {},
+  Brand: "",
 });
 let brands = reactive([]);
 
 onMounted(async () => {
   if (props.data) {
     model.value = await ModelService.findOne(props.data);
-    console.log(model.value);
   }
-  BrandService.list().then((response) => {
+  await BrandService.list().then((response) => {
     response.forEach((brand) => {
       brands.push(brand);
     });
   });
-
 });
 </script>
 

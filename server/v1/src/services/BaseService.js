@@ -1,5 +1,4 @@
 class BaseService {
-  BaseModel = null;
   constructor(model) {
     this.BaseModel = model;
   }
@@ -11,7 +10,7 @@ class BaseService {
     return new this.BaseModel(data).save();
   }
   findOne(where) {
-    return this.BaseModel?.findOne(where);
+   return this.BaseModel?.findOne(where);
   }
   update(id, data) {
     return this.BaseModel?.findByIdAndUpdate(id, data, { new: true });

@@ -52,8 +52,8 @@ let modal = ref({
   func: null,
 });
 let models = reactive([]);
-onMounted(() => {
-  ModelService.list().then((response) => {
+onMounted(async () => {
+  await ModelService.list().then((response) => {
     response.forEach((model) => {
       models.push(model);
     });
@@ -71,9 +71,7 @@ const newModel = () => {
         if (res) {
           models.push({
             ...res,
-            Brand: {
-              Name: model.Brand.Name,
-            },
+            Brand: model.Brand,
           });
           modal.value.display = false;
         }
@@ -90,10 +88,10 @@ const editModel = (modelId) => {
     func: (data) =>
       ModelService.update(modelId, data).then((res) => {
         if (res) {
-          models.push(data);
-          const index = models.indexOf(models.find((b) => b._id === modelId));
+          let index = models.indexOf((m) => m._id === modelId);
           models.splice(index, 1);
 
+          models.push(res);
           modal.value.display = false;
         }
       }),
