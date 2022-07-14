@@ -12,6 +12,7 @@ router.get("/", UserController.index.bind(UserController));
 router.route("/").post(validate(schemas.createValidation), UserController.create.bind(UserController));
 router.route("/").patch(authenticate, validate(schemas.updateValidation), UserController.update.bind(UserController));
 router.route("/login").post(validate(schemas.loginValidation), UserController.login.bind(UserController));
+router.route("/logout").post(UserController.logout.bind(UserController));
 router.route("/projects").get(authenticate, UserController.projectList.bind(UserController));
 router.route("/reset-password").post(validate(schemas.resetPasswordValidation), UserController.resetPassword.bind(UserController));
 router.route("/change-password").post(authenticate, validate(schemas.changePasswordValidation), UserController.changePassword.bind(UserController));

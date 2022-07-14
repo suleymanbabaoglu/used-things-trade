@@ -60,6 +60,22 @@ class UserController extends BaseController {
       .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
   }
 
+  logout(req, res) {
+    UserService.findOne(req.body)
+        .then((user) => {
+          if (!user) return res.status(httpStatus.NOT_FOUND).send({ message: "Böyle Bir Kullanıcı Bulunamadı." });
+          user = {
+            ...user.toObject(),
+            tokens: {
+              access_token: "",
+              refresh_token: "",
+            },
+          };
+          res.status(httpStatus.OK).send({message:"logout success"});
+        })
+        .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
+  }
+
   projectList(req, res) {
     ProjectService.list({ user_id: req.user?._id })
       .then((projects) => {

@@ -5,12 +5,21 @@
     >
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a @click="logout" class="nav-link" style="cursor:pointer">Sign out</a>
       </li>
     </ul>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+  /* eslint-disable */
+import UserService from "../services/UserService";
+import { useStore } from "vuex";
+
+const store = useStore();
+const logout = async () => {
+  await UserService.logout(store.getters.getAccess);
+};
+</script>
 
 <style scoped lang="scss"></style>
