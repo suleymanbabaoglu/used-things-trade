@@ -1,4 +1,5 @@
 import { appAxios } from "../utils/appAxios";
+import store from "../store";
 
 class BaseService {
   constructor(route) {
@@ -11,6 +12,7 @@ class BaseService {
         url,
         method,
         data,
+        headers: { Authorization: `Bearer ${store.getters.getAccess}` },
       }).then((response) => {
         return response.data;
       });

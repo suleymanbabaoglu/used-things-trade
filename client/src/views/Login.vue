@@ -35,8 +35,8 @@
 import { ref } from "vue";
 import UserService from "../services/UserService";
 let user = ref({
-  email: "",
-  password: "",
+  email: "s@b.com",
+  password: "123456789",
 });
 const login = async (data) => {
   await UserService.login(data);

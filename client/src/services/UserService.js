@@ -2,6 +2,7 @@ import BaseService from "./BaseService";
 import { Constraints } from "../helpers";
 import store from "../store";
 import router from "../router";
+import { setObjectLocalStorage } from "../helpers/Functions";
 class UserService extends BaseService {
   constructor() {
     super(Constraints.Routes.User);
@@ -13,13 +14,14 @@ class UserService extends BaseService {
       password: data.password,
     }).then((userResponse) => {
       if (userResponse) {
-        localStorage.setItem("is_authenticated", "true");
-        localStorage.setItem("access_token", userResponse.tokens.access_token);
-        localStorage.setItem(
-          "refresh_token",
-          userResponse.tokens.refresh_token
-        );
-        store.dispatch("setAuth", true).then(() => router.push("/"));
+        let authObject = {
+          is_authenticated: true,
+          access_token: userResponse.tokens.access_token,
+          refresh_token: userResponse.tokens.refresh_token,
+        };
+        setObjectLocalStorage("auth", authObject);
+        store.dispatch("setAuth", authObject);
+      if(store.getters.isAuth) router.push("/");
       }
     });
   }
@@ -29,11 +31,14 @@ class UserService extends BaseService {
       access_token: data,
     }).then((userResponse) => {
       if (userResponse) {
-        localStorage.setItem("is_authenticated", "false");
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-
-        store.dispatch("setAuth", false).then(() => router.push("/login"));
+        let authObject = {
+          is_authenticated: false,
+          access_token: "",
+          refresh_token: "",
+        };
+        setObjectLocalStorage("auth", authObject);
+        store.dispatch("setAuth", authObject);
+        router.push("/login");
       }
     });
   }

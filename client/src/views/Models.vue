@@ -97,7 +97,7 @@ const editModel = (modelId) => {
       }),
   };
 };
-const deleteModel = async (modelId) => {
+const deleteModel = (modelId) => {
   ModelService.delete(modelId).then((res) => {
     if (res) {
       const index = models.indexOf(models.find((b) => b._id === modelId));

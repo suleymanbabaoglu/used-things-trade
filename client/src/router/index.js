@@ -2,26 +2,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "../store";
 import routes from "./routes";
+import { getLocalStorage, setObjectLocalStorage } from "../helpers/Functions";
 
-
+if (!getLocalStorage("auth"))
+  setObjectLocalStorage("auth", {
+    is_authenticated: false,
+    access_token: "",
+    refresh_token: "",
+  });
+else store.dispatch("setAuth", JSON.parse(getLocalStorage("auth")));
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
-// eslint-disable-next-line no-unused-vars
-router.beforeEach(async (to, from) => {
+/**
+ * After Succeeded Login, set the auth true and navigate to home
+ */
+router.beforeEach((to, from, next) => {
+  store.dispatch("setLayout", to.name !== "Login");
+  to.name !== "Login" && !store.getters.isAuth
+    ? next({ name: "Login" })
+    : to.name === "Login" && store.getters.isAuth
+    ? next("/")
+    : next();
+});
 
-  if (!(store.state.isAuthenticated || localStorage.getItem("is_authenticated")) && to.name !== "Login") {
-    await store.dispatch("setLayout", 0)
-    await router.replace({name:"Login"});
-  }else
-    await store.dispatch("setLayout", 1)
-});
-router.afterEach(async (to, from) => {
-  if (to.name === "Login") {
-    await store.dispatch("setLayout", 0)
-  }
-});
 export default router;

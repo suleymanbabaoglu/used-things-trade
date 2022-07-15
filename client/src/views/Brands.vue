@@ -97,7 +97,7 @@ const editBrand = (brandId) => {
       }),
   };
 };
-const deleteBrand = async (brandId) => {
+const deleteBrand = (brandId) => {
   BrandService.delete(brandId).then((res) => {
     if (res) {
       const index = brands.indexOf(brands.find((b) => b._id === brandId));
