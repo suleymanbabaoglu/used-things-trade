@@ -2,7 +2,7 @@ const BaseController = require("./BaseController");
 const UserService = require("../services/UserService");
 const ProjectService = require("../services/CountryService");
 const httpStatus = require("http-status");
-const { passwordToHash, generateAccessToken, generateRefreshToken } = require("../scripts/utils/helper");
+const { passwordToHash, generateAccessToken, generateRefreshToken,getDateString } = require("../scripts/utils/helper");
 const uuid = require("uuid");
 const eventEmitter = require("../scripts/events/eventEmitter");
 const path = require("path");
@@ -12,9 +12,12 @@ class UserController extends BaseController {
     super(UserService);
   }
   index(req, res) {
-    this.BaseService?.list()
+    UserService.list()
       .then((response) => {
-        response.forEach(obj=>{obj.Password=undefined});
+        response.forEach((obj) => {
+          obj.Password = undefined;
+          obj.BirthDate = getDateString(obj.BirthDate);
+        });
         return res.status(httpStatus.OK).send(response);
       })
       .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
@@ -62,18 +65,18 @@ class UserController extends BaseController {
 
   logout(req, res) {
     UserService.findOne(req.body)
-        .then((user) => {
-          if (!user) return res.status(httpStatus.NOT_FOUND).send({ message: "Böyle Bir Kullanıcı Bulunamadı." });
-          user = {
-            ...user.toObject(),
-            tokens: {
-              access_token: "",
-              refresh_token: "",
-            },
-          };
-          res.status(httpStatus.OK).send({message:"logout success"});
-        })
-        .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
+      .then((user) => {
+        if (!user) return res.status(httpStatus.NOT_FOUND).send({ message: "Böyle Bir Kullanıcı Bulunamadı." });
+        user = {
+          ...user.toObject(),
+          tokens: {
+            access_token: "",
+            refresh_token: "",
+          },
+        };
+        res.status(httpStatus.OK).send({ message: "logout success" });
+      })
+      .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
   }
 
   projectList(req, res) {
