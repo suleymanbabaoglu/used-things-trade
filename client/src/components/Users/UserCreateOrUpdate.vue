@@ -146,22 +146,12 @@ import UserService from "../../services/UserService";
 const props = defineProps({
   data: Object,
 });
-let user = ref({
-  FirstName: "",
-  LastName: "",
-  Gender: false,
-  BirthDate: "",
-  ProfileType: true,
-  PostalCode: "",
-  Address: "",
-  Country: "",
-  Email: "",
-  Phone: "",
-});
+const user = ref({});
 
 onMounted(async () => {
   if (props.data) {
     user.value = await UserService.findOne(props.data);
+
   }
 });
 </script>
