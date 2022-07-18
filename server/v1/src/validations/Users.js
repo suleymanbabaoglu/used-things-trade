@@ -9,8 +9,20 @@ const createValidation = Joi.object({
 });
 
 const updateValidation = Joi.object({
-  full_name: Joi.string().min(3),
-  email: Joi.string().email().min(3),
+  _id: Joi.string(),
+  FirstName: Joi.string().min(3),
+  LastName: Joi.string().min(3),
+  Password: Joi.string().min(8),
+  Email: Joi.string().email().min(3),
+  Phone: Joi.number().min(3),
+  PostalCode: Joi.number().min(1),
+  Address: Joi.string().min(5),
+  Country: Joi.string().min(3),
+  BirthDate: Joi.string(),
+  Gender: Joi.bool(),
+  ProfileType: Joi.bool(),
+  createdAt: Joi.string(),
+  updatedAt: Joi.string(),
 });
 
 const loginValidation = Joi.object({

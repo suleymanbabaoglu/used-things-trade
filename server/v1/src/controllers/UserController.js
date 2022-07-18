@@ -1,8 +1,9 @@
 const BaseController = require("./BaseController");
 const UserService = require("../services/UserService");
 const ProjectService = require("../services/CountryService");
+const ApiError = require("../errors/ApiError");
 const httpStatus = require("http-status");
-const { passwordToHash, generateAccessToken, generateRefreshToken,getDateString } = require("../scripts/utils/helper");
+const { passwordToHash, generateAccessToken, generateRefreshToken, getDateString } = require("../scripts/utils/helper");
 const uuid = require("uuid");
 const eventEmitter = require("../scripts/events/eventEmitter");
 const path = require("path");
@@ -22,6 +23,38 @@ class UserController extends BaseController {
       })
       .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
   }
+
+  findOne(req, res) {
+    UserService?.findOne({ _id: req.params?.id })
+      .then((response) => {
+        response.Password = undefined;
+        res.status(httpStatus.OK).send(response);
+      })
+      .catch((err) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err));
+  }
+
+  update(req, res, next) {
+    if (!req.params?.id) return next(new ApiError("ID Bilgisi Gereklidir", 400));
+    let data = {
+      FirstName: req.body.FirstName,
+      LastName: req.body.LastName,
+      Email: req.body.Email,
+      Phone: req.body.Phone,
+      PostalCode: req.body.PostalCode,
+      Address: req.body.Address,
+      Country: req.body.Country,
+      BirthDate: req.body.BirthDate,
+      Gender: req.body.Gender,
+      ProfileType: req.body.ProfileType,
+    };
+    UserService.update(req.params.id, data)
+      .then((updated) => {
+        if (!updated) return next(new ApiError("Böyle Bir Kayıt Bulunmamaktadır.", 404));
+        res.status(httpStatus.OK).send(updated);
+      })
+      .catch((e) => next(new ApiError(e?.message)));
+  }
+
   resetPassword(req, res) {
     const new_password = uuid.v4()?.split("-")[0] || `usr-${new Date().getTime()}`;
     UserService.updateWhere({ email: req.body.email }, { password: passwordToHash(new_password) })

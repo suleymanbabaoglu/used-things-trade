@@ -10,7 +10,7 @@ const router = express.Router();
 // TODO: Bu kısımda BaseController için bind işlemi mevcut. Bu olmazsa controller çalışmıyor
 router.get("/", authenticate,UserController.index.bind(UserController));
 router.route("/").post(authenticate,validate(schemas.createValidation), UserController.create.bind(UserController));
-router.route("/").patch(authenticate, validate(schemas.updateValidation), UserController.update.bind(UserController));
+router.route("/:id").patch(authenticate, validate(schemas.updateValidation), UserController.update.bind(UserController));
 router.route("/login").post(validate(schemas.loginValidation), UserController.login.bind(UserController));
 router.route("/logout").post(authenticate,UserController.logout.bind(UserController));
 router.route("/projects").get(authenticate, UserController.projectList.bind(UserController));
