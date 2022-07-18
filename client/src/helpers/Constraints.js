@@ -3,6 +3,7 @@ const Constraints = {
     User: "users",
     Brand: "brands",
     Model: "models",
+    Advert: "adverts",
   },
 };
 

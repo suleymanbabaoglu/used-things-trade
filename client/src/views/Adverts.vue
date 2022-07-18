@@ -10,134 +10,92 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
+            <th>User</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1,001</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-          </tr>
-          <tr>
-            <td>1,002</td>
-            <td>placeholder</td>
-            <td>irrelevant</td>
-            <td>visual</td>
-            <td>layout</td>
-          </tr>
-          <tr>
-            <td>1,003</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-          </tr>
-          <tr>
-            <td>1,003</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,004</td>
-            <td>text</td>
-            <td>random</td>
-            <td>layout</td>
-            <td>dashboard</td>
-          </tr>
-          <tr>
-            <td>1,005</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>placeholder</td>
-          </tr>
-          <tr>
-            <td>1,006</td>
-            <td>dashboard</td>
-            <td>illustrative</td>
-            <td>rich</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,007</td>
-            <td>placeholder</td>
-            <td>tabular</td>
-            <td>information</td>
-            <td>irrelevant</td>
-          </tr>
-          <tr>
-            <td>1,008</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-          </tr>
-          <tr>
-            <td>1,009</td>
-            <td>placeholder</td>
-            <td>irrelevant</td>
-            <td>visual</td>
-            <td>layout</td>
-          </tr>
-          <tr>
-            <td>1,010</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-          </tr>
-          <tr>
-            <td>1,011</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,012</td>
-            <td>text</td>
-            <td>placeholder</td>
-            <td>layout</td>
-            <td>dashboard</td>
-          </tr>
-          <tr>
-            <td>1,013</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>visual</td>
-          </tr>
-          <tr>
-            <td>1,014</td>
-            <td>dashboard</td>
-            <td>illustrative</td>
-            <td>rich</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,015</td>
-            <td>random</td>
-            <td>tabular</td>
-            <td>information</td>
-            <td>text</td>
+          <tr v-for="(advert, advert_key) in adverts" :key="advert_key">
+            <td>{{ advert._id.substr(0, 6) }}</td>
+            <td>{{ advert.User.FirstName + " " + advert.User.LastName }}</td>
+            <td>{{ advert.Brand.Name }}</td>
+            <td>{{ advert.Model.Name }}</td>
+            <td>{{ advert.FirstRegistration.substr(0,4) }}</td>
+            <td>{{ advert.Type }}</td>
+            <td>
+              <a @click="details(advert)" class="text-primary mr-3">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </a>
+
+              <a @click="deleteAdvert(advert._id)" class="text-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
+      <app-modal :modal="modal" @close="modal.display = false" />
     </div>
   </main>
 </template>
 
-<script>
-export default {
-  name: "Adverts",
+<script setup>
+import { onMounted, reactive, ref } from "vue";
+import AdvertService from "../services/AdvertService";
+import AdvertDetails from "../components/Adverts/AdvertDetails";
+
+let adverts = reactive([]);
+let modal = ref({
+  display: false,
+  title: "",
+  key: "",
+  component: null,
+  data: null,
+  func: null,
+});
+onMounted(() => {
+  AdvertService.list().then((response) => {
+    response.forEach((advert) => {
+      adverts.push(advert);
+    });
+  });
+});
+
+const details = (data) => {
+  modal.value = {
+    display: true,
+    title: "Advert Details",
+    key: "advert" + Math.random(),
+    component: AdvertDetails,
+    data,
+    func: (id) =>
+      AdvertService.statusUpdate(id, { AdvertStatus: !data.AdvertStatus }).then(
+        (res) => {
+          if (res) {
+            adverts.push(res);
+            const index = adverts.indexOf(
+              adverts.find((u) => u._id === data._id)
+            );
+            adverts.splice(index, 1);
+
+            modal.value.display = false;
+          }
+        }
+      ),
+  };
+};
+
+const deleteAdvert = (userId) => {
+  AdvertService.delete(userId).then((res) => {
+    if (res) {
+      const index = adverts.indexOf(adverts.find((b) => b._id === userId));
+      adverts.splice(index, 1);
+    }
+  });
 };
 </script>
 
