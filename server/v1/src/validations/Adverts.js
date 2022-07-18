@@ -11,7 +11,7 @@ const createValidation = Joi.object({
   Status: Joi.required(),
   Advertiser: Joi.boolean().required(),
   HorsePower: Joi.number(),
-  Kilowatts: Joi.number(),
+  KiloWatts: Joi.number(),
   Fuel: Joi.required(),
   Transmission: Joi.required(),
   Drive: Joi.number(),
@@ -21,6 +21,8 @@ const createValidation = Joi.object({
   Country: Joi.required(),
   State: Joi.required(),
   City: Joi.required(),
+  Description: Joi.string().required().min(3),
+  AdvertStatus: Joi.boolean().required()
 });
 
 const updateValidation = Joi.object({
@@ -44,7 +46,11 @@ const updateValidation = Joi.object({
   Country: Joi.required(),
   State: Joi.required(),
   City: Joi.required(),
+  Description: Joi.string().required().min(3),
+  AdvertStatus: Joi.boolean().required()
 });
+
+
 
 module.exports = {
   createValidation,

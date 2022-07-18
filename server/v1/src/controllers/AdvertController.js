@@ -6,7 +6,6 @@ class AdvertController extends BaseController {
   constructor() {
     super(AdvertService);
   }
-
   photoUpload() {
     PhotoGalleryService.create("");
   }

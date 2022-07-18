@@ -13,34 +13,39 @@ const AdvertSchema = new Mongoose.Schema(
     Price: Mongoose.Types.Decimal128,
     Kilometer: Number,
     FirstRegistration: Date,
-    Type: {
+    /*Type: {
       type: Mongoose.Types.ObjectId,
       ref: "VehicleType",
-    },
+    },*/
+    Type: String,
     Warranty: Boolean,
-    Status: {
+    /*Status: {
       type: Mongoose.Types.ObjectId,
       ref: "VehicleStatus",
-    },
+    },*/
+    Status: String,
     Advertiser: Boolean,
-    HorsePowers: Number,
+    HorsePower: Number,
     KiloWatts: Number,
-    Fuel: {
+    /*Fuel: {
       type: Mongoose.Types.ObjectId,
       ref: "Fuel",
-    },
-    Transmission: {
+    },*/
+    Fuel: String,
+    /*Transmission: {
       type: Mongoose.Types.ObjectId,
       ref: "Transmission",
-    },
+    },*/
+    Transmission: String,
     Drive: Number,
-    Color: {
+    /*Color: {
       type: Mongoose.Types.ObjectId,
       ref: "Color",
-    },
+    },*/
+    Color: String,
     Doors: Number,
     Seats: Number,
-    Country: {
+    /*Country: {
       type: Mongoose.Types.ObjectId,
       ref: "Country",
     },
@@ -51,11 +56,17 @@ const AdvertSchema = new Mongoose.Schema(
     City: {
       type: Mongoose.Types.ObjectId,
       ref: "City",
-    },
+    },*/
+
     User: {
       type: Mongoose.Types.ObjectId,
       ref: "User",
     },
+    Country: String,
+    State: String,
+    City: String,
+    AdvertStatus: Boolean,
+    Description: String,
   },
   { versionKey: false, timestamps: true }
 );
