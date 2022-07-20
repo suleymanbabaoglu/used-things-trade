@@ -4,11 +4,14 @@
       <div class="col-md-12">
         <table>
           <tr>
-            <h4>
-              {{ data.User.FirstName + " " + data.User.LastName }}
-              [ {{ data._id.substr(0, 6) }} ] [
-              {{ data.AdvertStatus ? "Active" : "Passive" }} ]
-            </h4>
+            <td>
+              <h4>{{ data.User.FirstName + " " + data.User.LastName }}</h4>
+            </td>
+            <td>
+              <h4>
+                [ <span :class="data.AdvertStatus ?'text-success' :'text-danger'">ID: {{ data._id.substr(0, 6) }} </span> ]
+              </h4>
+            </td>
           </tr>
           <tr>
             <td>
@@ -144,6 +147,7 @@
 
 <script setup>
 import { defineProps } from "vue";
+
 defineProps({
   data: Object,
 });
