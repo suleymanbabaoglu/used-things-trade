@@ -52,90 +52,7 @@
             <td>visual</td>
             <td>layout</td>
           </tr>
-          <tr>
-            <td>1,003</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-          </tr>
-          <tr>
-            <td>1,003</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,004</td>
-            <td>text</td>
-            <td>random</td>
-            <td>layout</td>
-            <td>dashboard</td>
-          </tr>
-          <tr>
-            <td>1,005</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>placeholder</td>
-          </tr>
-          <tr>
-            <td>1,006</td>
-            <td>dashboard</td>
-            <td>illustrative</td>
-            <td>rich</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,007</td>
-            <td>placeholder</td>
-            <td>tabular</td>
-            <td>information</td>
-            <td>irrelevant</td>
-          </tr>
-          <tr>
-            <td>1,008</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-          </tr>
-          <tr>
-            <td>1,009</td>
-            <td>placeholder</td>
-            <td>irrelevant</td>
-            <td>visual</td>
-            <td>layout</td>
-          </tr>
-          <tr>
-            <td>1,010</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-          </tr>
-          <tr>
-            <td>1,011</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-          </tr>
-          <tr>
-            <td>1,012</td>
-            <td>text</td>
-            <td>placeholder</td>
-            <td>layout</td>
-            <td>dashboard</td>
-          </tr>
-          <tr>
-            <td>1,013</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>visual</td>
-          </tr>
+
           <tr>
             <td>1,014</td>
             <td>dashboard</td>
@@ -167,38 +84,26 @@ const barChart = {
     responsive: true,
     plugins: {
       legend: {
-        position: "left",
+        position: "top",
       },
     },
     scales: {
       y: {
         min: 0,
-        max: 100,
+        max: 20000,
         ticks: {
-          callback: function (value) {
-            return `${value}%`;
-          },
+          callback: (value) => `${value}`,
         },
       },
     },
   },
   data: {
-    labels: ["VueJs", "EmberJs", "ReactJs", "AngularJs"],
+    labels: ["Adverts", "Brands", "Models", "Users"],
     datasets: [
       {
-        label: "My First Dataset",
-        backgroundColor: ["#1abc9c", "#f1c40f", "#2980b9", "#34495e"],
-        data: [40, 20, 50, 10],
-      },
-      {
-        label: "My Second Dataset",
-        backgroundColor: ["#2ecc71", "#e67e22", "#9b59b6", "#bdc3c7"],
-        data: [20, 40, 10, 50],
-      },
-      {
-        label: "My Third Dataset",
-        backgroundColor: ["#2980b9", "#34495e", "#e67e22", "#f1c40f"],
-        data: [26, 44, 45, 75],
+        label: "",
+        backgroundColor: ["#34755e"],
+        data: [10000, 5000, 8000, 1000],
       },
     ],
   },
