@@ -13,14 +13,11 @@
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Gender</th>
-            <th>Birth Date</th>
-            <th>Profile Type</th>
-            <th>Postal Code</th>
-            <th>Address</th>
-            <th>Country</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Gender</th>
+            <th>Profile Type</th>
+            <th>Country</th>
             <th>#</th>
           </tr>
         </thead>
@@ -29,14 +26,11 @@
             <td>{{ user._id.substr(0, 6) }}</td>
             <td>{{ user.FirstName }}</td>
             <td>{{ user.LastName }}</td>
-            <td>{{ user.Gender ? "Male" : "Female" }}</td>
-            <td>{{ user.BirthDate }}</td>
-            <td>{{ user.ProfileType ? "Private" : "Company" }}</td>
-            <td>{{ user.PostalCode }}</td>
-            <td>{{ user.Address }}</td>
-            <td>{{ user.Country }}</td>
             <td>{{ user.Email }}</td>
             <td>{{ user.Phone }}</td>
+            <td>{{ user.Gender ? "Male" : "Female" }}</td>
+            <td>{{ user.ProfileType ? "Private" : "Company" }}</td>
+            <td>{{ user.Country }}</td>
             <td>
               <a @click="editUser(user._id)" class="text-primary mr-3">
                 <i class="fa fa-pencil" aria-hidden="true"></i>

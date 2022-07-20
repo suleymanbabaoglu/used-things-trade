@@ -25,15 +25,13 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="gender" class="control-label">Gender</label>
-        <input
-          id="gender"
-          type="text"
-          class="form-control mb-1"
-          v-model="user.Gender"
-          placeholder="Gender"
-        />
+        <select class="form-control" id="gender" v-model="user.Gender">
+          <option value="">Select a Gender</option>
+          <option value="false">Female</option>
+          <option value="true">Male</option>
+        </select>
       </div>
     </div>
   </div>
@@ -53,13 +51,11 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="profileType" class="control-label">Profile Type</label>
-        <input
-          id="profileType"
-          type="text"
-          class="form-control mb-1"
-          v-model="user.ProfileType"
-          placeholder="Profile Type"
-        />
+        <select class="form-control" id="profileType" v-model="user.ProfileType">
+          <option value="">Select a Profile Type</option>
+          <option value="false">Private</option>
+          <option value="true">Company</option>
+        </select>
       </div>
     </div>
     <div class="col-md-6">
@@ -151,7 +147,6 @@ const user = ref({});
 onMounted(async () => {
   if (props.data) {
     user.value = await UserService.findOne(props.data);
-
   }
 });
 </script>
