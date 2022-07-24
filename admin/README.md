@@ -1,4 +1,4 @@
-# used-things-trade-client
+# used-things-trade
 
 ## Project setup
 ```

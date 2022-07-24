@@ -1,5 +1,5 @@
 {
-  "name": "used-things-trade-client",
+  "name": "used-things-trade-admin",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@j-t-mcc/vue3-chartjs": "^1.3.0",
     "axios": "^0.27.2",
+    "chart.js": "^3.8.0",
     "core-js": "^3.23.5",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2",
@@ -29,5 +31,27 @@
     "node-sass": "^7.0.1",
     "prettier": "^2.7.1",
     "sass-loader": "^13.0.2"
-  }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "_id": "used-things-trade-admin@1.0.0",
+  "readme": "ERROR: No README data found!"
 }
